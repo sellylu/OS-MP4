@@ -1,0 +1,37 @@
+==8978== Memcheck, a memory error detector
+==8978== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==8978== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==8978== Command: ../build.linux/nachos -cp num_100.txt /t0/bb/f3
+==8978== 
+==8978== Syscall param write(buf) points to uninitialised byte(s)
+==8978==    at 0x98E8A3: __write_nocancel (in /lib/libc-2.12.so)
+==8978==    by 0x804CCB2: WriteFile(int, char*, int) (sysdep.cc:366)
+==8978==    by 0x8052E11: Disk::WriteRequest(int, char*) (disk.cc:143)
+==8978==    by 0x805C5CF: SynchDisk::WriteSector(int, char*) (synchdisk.cc:79)
+==8978==    by 0x805A8A8: FileHeader::WriteBack(int) (filehdr.cc:186)
+==8978==    by 0x805B2CD: FileSystem::Create(char*, int) (filesys.cc:225)
+==8978==    by 0x8054C03: Copy(char*, char*) (main.cc:100)
+==8978==    by 0x80557D6: main (main.cc:315)
+==8978==  Address 0x41627d0 is 40 bytes inside a block of size 128 alloc'd
+==8978==    at 0x4008465: operator new(unsigned int) (vg_replace_malloc.c:327)
+==8978==    by 0x805A4C4: FileHeader::Allocate(PersistentBitmap*, int) (filehdr.cc:105)
+==8978==    by 0x805B2AA: FileSystem::Create(char*, int) (filesys.cc:220)
+==8978==    by 0x8054C03: Copy(char*, char*) (main.cc:100)
+==8978==    by 0x80557D6: main (main.cc:315)
+==8978== 
+==8978== 
+==8978== HEAP SUMMARY:
+==8978==     in use at exit: 648 bytes in 2 blocks
+==8978==   total heap usage: 338 allocs, 336 frees, 33,688 bytes allocated
+==8978== 
+==8978== LEAK SUMMARY:
+==8978==    definitely lost: 0 bytes in 0 blocks
+==8978==    indirectly lost: 0 bytes in 0 blocks
+==8978==      possibly lost: 0 bytes in 0 blocks
+==8978==    still reachable: 648 bytes in 2 blocks
+==8978==         suppressed: 0 bytes in 0 blocks
+==8978== Rerun with --leak-check=full to see details of leaked memory
+==8978== 
+==8978== For counts of detected and suppressed errors, rerun with: -v
+==8978== Use --track-origins=yes to see where uninitialised values come from
+==8978== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 18 from 8)
